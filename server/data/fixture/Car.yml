@@ -1,0 +1,33 @@
+entity: CarEntity
+items:
+  car0:
+    model: 'model01'
+    brand: 'brand01'
+    carStyle: 'sedan'
+    passengers: '5'
+    maxSpeed: '300'
+    tankSize: '120'
+    ac: true
+    color: 'color01'
+    transmision: 'manual'
+    doors: '4'
+    availability: true
+    pricePerDay: '1000'
+    desc: 'some desc 1'
+    img: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'
+
+  car1:
+    model: 'model02'
+    brand: 'brand02'
+    carStyle: 'convertivle'
+    passengers: '6'
+    maxSpeed: '320'
+    tankSize: '130'
+    ac: true
+    color: 'color02'
+    transmision: 'automatic'
+    doors: '5'
+    availability: true
+    pricePerDay: '2000'
+    desc: 'some desc 2'
+    img: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'

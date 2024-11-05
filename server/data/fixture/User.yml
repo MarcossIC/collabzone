@@ -1,0 +1,16 @@
+entity: UserEntity
+items:
+  user0:
+    email: 'testunique02@gmail.com'
+    externalID: 'asdasd12312asadd123'
+    name: 'testName0'
+    country: 'TestCountry0'
+    phone: 'phone0'
+
+  user1:
+    email: 'tesuniquer01@gmail.com'
+    externalID: '123124asdas123dsa12'
+    name: 'testName1'
+    country: 'TestCountry1'
+    phone: 'phone1'
+    
