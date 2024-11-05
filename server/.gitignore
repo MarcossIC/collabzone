@@ -49,4 +49,4 @@ data/docker/volumes/mysql/*
 .scannerwork/*
 
 # husky
-.husky
+/.husky/*
