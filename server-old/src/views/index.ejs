@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API REST - Bienvenido</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/socket.io/socket.io.js"></script> <!-- Socket.IO Client -->
+</head>
+<body class="bg-gray-900 bg-opacity-80 text-white">
+    <header class="bg-white bg-opacity-80 shadow">
+        <nav class="container mx-auto flex justify-between items-center p-4">
+            <a href="/" class="text-xl font-bold text-blue-600">API REST</a>
+            <ul class="flex space-x-4">
+                <li><a href="/api-docs" class="text-gray-800 hover:text-blue-600">Documentación</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-6 bg-white bg-opacity-90 rounded shadow-lg mt-10">
+        <h1 class="text-4xl font-bold mb-4 text-center text-gray-700">Bienvenido a la API REST</h1>
+        <p class="mb-4 text-gray-700">Esta API REST se basa en el estándar RESTful, permitiendo la interacción a través de métodos HTTP. Las rutas disponibles incluyen:</p>
+        <p class="mb-4 text-gray-700">
+            Para más información sobre cómo utilizar esta API, consulta la documentación disponible en 
+            <a href="/api-docs" class="text-blue-600 underline hover:text-blue-800">Swagger Document</a>.
+        </p>
+
+        <!-- Nueva Sección para mostrar usuarios conectados -->
+        <div class="mt-10">
+            <h2 class="text-2xl font-semibold mb-4 text-center text-gray-700">Usuarios Conectados</h2>
+            <ul id="usersList" class="space-y-2">
+                <!-- Aquí se agregarán los usuarios conectados dinámicamente -->
+            </ul>
+        </div>
+    </main>
+
+    <script>
+        // Conexión a Socket.IO
+        const socket = io();
+
+        // Escuchar actualizaciones del estado de los usuarios
+        socket.on('userStatusUpdate', ({ userId, status }) => {
+            const usersList = document.getElementById('usersList');
+            let userItem = document.getElementById(`user-${userId}`);
+
+            // Si el usuario ya está en la lista, actualizamos su estado
+            if (userItem) {
+                userItem.textContent = `Usuario ${userId} está ${status}`;
+            } else {
+                // Si no está, lo añadimos a la lista
+                userItem = document.createElement('li');
+                userItem.id = `user-${userId}`;
+                userItem.className = 'text-gray-700 text-lg';
+                userItem.textContent = `Usuario ${userId} está ${status}`;
+                usersList.appendChild(userItem);
+            }
+        });
+
+        // Eliminar usuario de la lista al desconectarse
+        socket.on('userDisconnected', (userId) => {
+            const userItem = document.getElementById(`user-${userId}`);
+            if (userItem) {
+                userItem.remove();
+            }
+        });
+    </script>
+</body>
+</html>

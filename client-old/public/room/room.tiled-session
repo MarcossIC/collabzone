@@ -1,0 +1,83 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "room.json",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "GRASSTILE.json": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "room.json": {
+            "scale": 1.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 227.33333333333331,
+                "y": 200.66666666666666
+            }
+        },
+        "room.json#GRASSTILE": {
+            "scaleInDock": 1
+        },
+        "room.json#GROUND DETAIL 1 - DAY": {
+            "dynamicWrapping": true,
+            "scaleInEditor": 1
+        },
+        "room.json#HOUSE1": {
+            "scaleInDock": 1,
+            "scaleInEditor": 4
+        },
+        "room.json#STAIRS": {
+            "scaleInDock": 1
+        },
+        "room.json#TERRAINSET3": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 5.5
+        },
+        "room.tmx": {
+            "scale": 0.520125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 399.90386926219657,
+                "y": 280.7017543859649
+            }
+        },
+        "room.tmx#BRIDGE": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Users/usuario/Desktop/Marcos/Programacion/Mis Proyectos/s18-01-ft-react/client/public/room",
+    "last.externalTilesetPath": "C:/Users/usuario/Desktop/Marcos/Programacion/Mis Proyectos/s18-01-ft-react/client/public/room",
+    "last.imagePath": "C:/Users/usuario/Desktop/Marcos/Programacion/Mis Proyectos/s18-01-ft-react/client/public/room/images",
+    "map.height": 35,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 50,
+    "openFiles": [
+        "room.json"
+    ],
+    "project": "room.tiled-project",
+    "recentFiles": [
+        "room.json",
+        "GRASSTILE.json",
+        "room.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    },
+    "tileset.type": 0,
+    "tileset.useTransparentColor": true
+}
