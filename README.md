@@ -1,5 +1,3 @@
-<h1 align="center">s18-01-ft-react</h1>
-
 # CollabZone
 
 CollabZone es una innovadora aplicación de oficinas online diseñada para mejorar la colaboración y productividad en equipos de trabajo distribuidos. Con un entorno 2D interactivo y herramientas integradas, las empresas pueden crear espacios dinámicos y eficientes para sus empleados y colaboradores.
@@ -57,30 +55,3 @@ CollabZone ofrece un espacio virtual donde los usuarios pueden moverse librement
   <img height="35" alt="Passport" src="https://cdn.simpleicons.org/passport/34E27A?viewbox=auto" />
   <img height="35" alt="Socket Io" src="https://cdn.simpleicons.org/socket.io/505050?viewbox=auto" />
 </div>
-
-## 🚀 Demo
-
-Puede ver el sitio en: [CollabZone](https://no-countrys18.netlify.app)
-
-## 🤝 Contribuidores
-
-### 📌 Team Leader:
-
-|                                                         <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>                                                          |
-| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|                                                                                           **Diego Veras**                                                                                            |
-| <a href="https://www.linkedin.com/in/diego-cristian-alfredo-v-54b459249/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
-
-### 🎨 Designers:
-
-|                                              <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>                                               |                                                    <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>                                                     |
-| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|                                                                                **Sasha Sawosz**                                                                                |                                                                                    **Diego Alexander**                                                                                     |
-| <a href="https://www.linkedin.com/in/sasha-sawosz/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/diego-alexander-918a62210"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
-
-### 🧑‍💻 Developers:
-
-|                                                   <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>                                                   |                                                  <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>                                                   |                                              <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>                                               |                                                <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>                                                 |                                                    <img src="https://www.nicepng.com/png/full/128-1280406_user-icon-png.png" width=50>                                                    |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|                                                                                     **Cesar Lopez**                                                                                     |                                                                                    **Thomas Lopez**                                                                                    |                                                                             **Rocio Tellez Lopez**                                                                             |                                                                                  **Marcos Lopez**                                                                                  |                                                                               **Orlando Cardenas Villegas**                                                                               |
-| <a href="https://www.linkedin.com/in/cesar-lopez-a7226625a/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/thomas-ignacio-lopez/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/yanehttellez/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/marcos-lopez-dev/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.linkedin.com/in/orlandocardenasvillegas/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
