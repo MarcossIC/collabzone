@@ -4,12 +4,12 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.resolve(path.dirname(__filename), '../..');
+const __dirname = path.resolve(path.dirname(__filename), '../../');
 
 try {
   // Initialize Husky
   // Es necesario salir de la carpeta porque husky se debe ejecutar en donde esta el directorio ".git"
-  execSync('cd ../../.. && npx husky server/.husky', { stdio: 'inherit' });
+  execSync('cd ../../../ && npx husky server/.husky i', { stdio: 'inherit' });
 
   // Create .husky directory if it doesn't exist
   const huskyDir = path.join(__dirname, '.husky');
