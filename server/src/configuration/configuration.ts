@@ -10,6 +10,8 @@ export const configuration = () => {
       UI_LOCAL_URL: process.env.UI_LOCAL_URL,
       COOKIE_SECRET: process.env.COOKIE_SECRET,
     },
+    APP_DOMAIN: process.env.APP_DOMAIN,
+    APP_ID: process.env.APP_ID,
     redis: testing ? undefined : redisUrlToOptions(process.env.REDIS_URL),
     ttl: parseInt(process.env.REDIS_CACHE_TTL, 10) * 1000,
     testing,

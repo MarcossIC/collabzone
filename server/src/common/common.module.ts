@@ -1,14 +1,12 @@
 import { Module } from '@nestjs/common';
 
-import { CommonMapper } from './domain/mapper/common.mapper';
 import { LoggerService } from './infrastructure/logger/logger.service';
 import { ILoggerService } from './infrastructure/logger/logger.adapter';
-import { CommonService } from './infrastructure/common.service';
-import { CommonServiceAdapter } from './domain/port/common.service.adapter';
+import { CommonServiceAdapter } from './infrastructure/common.service.adapter';
+import { CommonService } from './domain/port/common.service';
 
 @Module({
   providers: [
-    CommonMapper,
     {
       provide: ILoggerService,
       useFactory: () => {
@@ -18,12 +16,12 @@ import { CommonServiceAdapter } from './domain/port/common.service.adapter';
       }
     },
     {
-      provide: CommonServiceAdapter,
-      useClass: CommonService
+      provide: CommonService,
+      useClass: CommonServiceAdapter
     }
   ],
   exports: [
-    CommonMapper,ILoggerService,CommonServiceAdapter
+    ILoggerService,CommonService
   ],
 })
 export class CommonModule {}

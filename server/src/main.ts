@@ -1,9 +1,11 @@
 import {
   ClassSerializerInterceptor,
   ValidationPipe,
-  Logger,
   HttpStatus,
   RequestMethod,
+  ValidationError,
+  BadRequestException,
+  HttpException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory, Reflector } from '@nestjs/core';
@@ -65,6 +67,20 @@ async function bootstrap() {
         enableImplicitConversion: true,
       },
       errorHttpStatusCode: HttpStatus.PRECONDITION_FAILED,
+      exceptionFactory: (errors: ValidationError[]) => {
+        const formattedErrors = errors.map((error) => ({
+          field: error.property,
+          messages: Object.values(error.constraints || {}),
+        }));
+        return new HttpException(
+          {
+            statusCode: HttpStatus.PRECONDITION_FAILED,
+            message: 'Validation failed',
+            errors: formattedErrors,
+          },
+          HttpStatus.PRECONDITION_FAILED,
+        );
+      },
     }),
   );
   app.enableShutdownHooks();

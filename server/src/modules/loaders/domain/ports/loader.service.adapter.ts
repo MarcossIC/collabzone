@@ -1,9 +1,10 @@
-import { Base } from '@/common/domain/types/base.domain';
+import { Base } from '@/common/domain/models/base.domain';
 import { FilterRelationType } from '@/common/domain/types/filterRelation';
 import { Creation } from '../valueobjets/creation';
 import { Loader } from '../valueobjets/loader';
 import { Paginated } from '@/common/domain/types/paginated';
 import { CountResult } from '../valueobjets/countResult';
+import { UUID } from 'crypto';
 
 export abstract class LoaderServiceAdapter {
   /**
@@ -30,8 +31,8 @@ export abstract class LoaderServiceAdapter {
    */
   protected static getEntityIds<T extends Base, P = undefined>(
     items: Loader<T, P>[],
-  ): number[] {
-    const ids: number[] = [];
+  ): UUID[] {
+    const ids: UUID[] = [];
 
     for (let i = 0; i < items.length; i++) {
       ids.push(items[i].obj.id);
@@ -48,8 +49,8 @@ export abstract class LoaderServiceAdapter {
   protected static getRelationIds<T extends Base, P = undefined>(
     items: Loader<T, P>[],
     relationName: string,
-  ): number[] {
-    const ids: number[] = [];
+  ): UUID[] {
+    const ids: UUID[] = [];
 
     for (let i = 0; i < items.length; i++) {
       ids.push(items[i].obj[relationName].id);
@@ -64,8 +65,8 @@ export abstract class LoaderServiceAdapter {
    * Turns an array of entity objects into a map of entity objects
    * with its ID as the key.
    */
-  protected static getEntityMap<T extends Base>(entities: T[]): Map<number, T> {
-    const map = new Map<number, T>();
+  protected static getEntityMap<T extends Base>(entities: T[]): Map<UUID, T> {
+    const map = new Map<UUID, T>();
 
     for (let i = 0; i < entities.length; i++) {
       const entity = entities[i];
@@ -81,8 +82,8 @@ export abstract class LoaderServiceAdapter {
    * Maps an array of IDs to corresponding entities from a map.
    */
   protected static getResults<T>(
-    ids: number[],
-    map: Map<number, T>,
+    ids: UUID[],
+    map: Map<UUID, T>,
     defaultValue: T | null = null,
   ): T[] {
     const results: T[] = [];
@@ -100,10 +101,10 @@ export abstract class LoaderServiceAdapter {
    * Maps entity IDs to count results from raw data.
    */
   protected static getCounterResults(
-    ids: number[],
+    ids: UUID[],
     raw: CountResult[],
   ): number[] {
-    const map = new Map<number, number>();
+    const map = new Map<UUID, number>();
 
     for (let i = 0; i < raw.length; i++) {
       const count = raw[i];

@@ -1,21 +1,22 @@
 import { Injectable } from "@nestjs/common";
 import { Loader } from "../domain/valueobjets/loader";
-import { Base } from "@/common/domain/types/base.domain";
+import { Base } from "@/common/domain/models/base.domain";
 import { CountResult } from "../domain/valueobjets/countResult";
 import { EntityManager } from "typeorm";
 import { Creation } from "../domain/valueobjets/creation";
-import { CommonServiceAdapter } from "@/common/domain/port/common.service.adapter";
+import { CommonService } from "@/common/domain/port/common.service";
 import { FilterRelationType } from "@/common/domain/types/filterRelation";
 import { Paginated } from "@/common/domain/types/paginated";
 import { ExistenceResult } from "../domain/valueobjets/existenceResult";
 import { LoaderServiceAdapter } from "../domain/ports/loader.service.adapter";
+import { UUID } from "crypto";
 
 
 @Injectable()
 export class LoadersService extends  LoaderServiceAdapter {
   constructor(
     private readonly em: EntityManager,
-    private readonly commonService: CommonServiceAdapter,
+    private readonly commonService: CommonService,
   ) {
     super();
   }
@@ -167,7 +168,7 @@ export class LoadersService extends  LoaderServiceAdapter {
       .getRawAndEntities();
 
     // Procesamos los resultados
-    const map = new Map<number, Paginated<C>>();
+    const map = new Map<UUID, Paginated<C>>();
 
     for (const result of results.entities) {
       const rawResult = results.raw.find(r => r.id === result.id);
@@ -235,7 +236,7 @@ export class LoadersService extends  LoaderServiceAdapter {
         .getRawMany();
   
       // Creamos el mapa de resultados
-      const map = new Map<number, boolean>();
+      const map = new Map<UUID, boolean>();
       
       for (const result of raw) {
         map.set(result.id, Boolean(result.existence));

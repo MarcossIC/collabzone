@@ -1,5 +1,7 @@
+import { UUID } from "crypto";
+
 export interface ExistenceResult {
-    id: number;
+    id: UUID;
     existence: 0 | 1;
   }
   

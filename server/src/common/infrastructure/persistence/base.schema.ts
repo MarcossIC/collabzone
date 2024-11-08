@@ -1,14 +1,15 @@
 import { EntitySchemaColumnOptions } from 'typeorm';
 
-const columnDateType =
+export const columnDateType =
   process.env.NODE_ENV === 'automated_tests' ? 'date' : 'timestamp';
+export const columnEnumType = process.env.NODE_ENV === 'automated_tests' ? 'varchar' : 'enum'
 
 export const baseColumnSchemas: { [key: string]: EntitySchemaColumnOptions } = {
   id: {
     name: 'id',
-    type: 'integer',
+    type: 'uuid',
     primary: true,
-    generated: true,
+    generated: "uuid",
   },
   createdAt: {
     name: 'created_at',

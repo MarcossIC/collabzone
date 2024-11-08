@@ -1,9 +1,17 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 
 import { errorStatus } from '../../common/domain/static/httpStatus';
 import { ApiException, ErrorModel } from '../../common/domain/types/exception';
-import { formatDate } from '../../common/domain/mapper/formatDay';
+import { formatDate } from '../../common/domain/utils/formatDay';
 import { ILoggerService } from '../../common/infrastructure/logger/logger.adapter';
+import { FastifyReply } from 'fastify';
+import { ValidationError } from 'class-validator';
 
 @Catch()
 export class AppExceptionFilter implements ExceptionFilter {
@@ -11,7 +19,7 @@ export class AppExceptionFilter implements ExceptionFilter {
 
   catch(exception: ApiException, host: ArgumentsHost): void {
     const context = host.switchToHttp();
-    const response = context.getResponse();
+    const response = context.getResponse<FastifyReply>();
     const request = context.getRequest<Request>();
 
     const status =
@@ -21,16 +29,24 @@ export class AppExceptionFilter implements ExceptionFilter {
 
     exception.traceid = [exception.traceid, request['id']].find(Boolean);
 
-    this.logger.error(exception, exception.message, exception.context);
+    const error = {
+      code: status,
+      traceid: exception.traceid,
+      message: exception?.message
+        ? exception.message
+        : errorStatus[String(status)],
+      details: undefined,
+      timestamp: formatDate(new Date()),
+      path: request.url,
+    };
 
-    response.status(status).json({
-      error: {
-        code: status,
-        traceid: exception.traceid,
-        message: [errorStatus[String(status)], exception.message].find(Boolean),
-        timestamp: formatDate(new Date()),
-        path: request.url,
-      },
+    if (error.code === HttpStatus.PRECONDITION_FAILED) {
+      const res = exception.getResponse() as object;
+      error.details = 'errors' in res ? res.errors : {}; 
+    }
+
+    response.status(status).send({
+      error,
     } as ErrorModel);
   }
 }

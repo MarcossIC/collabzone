@@ -1,0 +1,35 @@
+###
+POST http://localhost:3002/api/v1/identity/signin
+Content-Type: application/json
+
+{
+    "email": "marcoslopezdev18@gmail.com",
+    "password": "marcoslopezdev18@gmail.com"
+}
+
+###
+POST http://localhost:3002/api/v1/identity/signup
+Content-Type: application/json
+
+{
+    "email": "marcoslopezdev18@gmail.com",
+    "password": "marcoslopezdev18@gmail.com",
+    "name": "Marcos",
+    "lastname": "Lopez"
+}
+
+###
+POST http://localhost:3002/api/v1/identity/refresh
+set-cookie: refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyMjhjNmZiLWEzZDEtNGI1NC1iYjEwLTY1NDA2NGE2OTBmMyIsInZlcnNpb24iOjEsInRva2VuSWQiOiI5ZDliNzU1NS1jZWRhLTQ2YjMtYTZmZS04YmMzYTNiYjlmMjciLCJpYXQiOjE3MzEwNTgzMzUsImV4cCI6Mjk0MDY1ODMzNSwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDozMDAyIiwiaXNzIjoiQ29sbGFiWm9uZS1BUFAiLCJzdWIiOiJtYXJjb3Nsb3BlemRldjE4QGdtYWlsLmNvbSJ9.YO86kfpHvtQgwBbCWZbQ8w9Wha6NrC7wTYwjZVAY2jQ.HeIgRyEtXIrLVd3DXywy%2B2KiCO8Hm%2BcWkmdoltRyM%2F0,access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyMjhjNmZiLWEzZDEtNGI1NC1iYjEwLTY1NDA2NGE2OTBmMyIsImlhdCI6MTczMTA1ODMzNSwiZXhwIjoxODE3NDU4MzM1LCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDIiLCJpc3MiOiJDb2xsYWJab25lLUFQUCIsInN1YiI6Im1hcmNvc2xvcGV6ZGV2MThAZ21haWwuY29tIn0.QF4XzQ1jq8s5IstIrG8dwHOPM19xkUHHfXem6TGJRaA.gy8yw2YlmcsPUGrk%2Fn2OSNsDRQRKpMjngEJ%2B8yYJzgM
+
+###
+POST http://localhost:3002/api/v1/identity/logout
+set-cookie: refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyMjhjNmZiLWEzZDEtNGI1NC1iYjEwLTY1NDA2NGE2OTBmMyIsInZlcnNpb24iOjEsInRva2VuSWQiOiI5ZDliNzU1NS1jZWRhLTQ2YjMtYTZmZS04YmMzYTNiYjlmMjciLCJpYXQiOjE3MzEwNTgzMzUsImV4cCI6Mjk0MDY1ODMzNSwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDozMDAyIiwiaXNzIjoiQ29sbGFiWm9uZS1BUFAiLCJzdWIiOiJtYXJjb3Nsb3BlemRldjE4QGdtYWlsLmNvbSJ9.YO86kfpHvtQgwBbCWZbQ8w9Wha6NrC7wTYwjZVAY2jQ.HeIgRyEtXIrLVd3DXywy%2B2KiCO8Hm%2BcWkmdoltRyM%2F0,access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyMjhjNmZiLWEzZDEtNGI1NC1iYjEwLTY1NDA2NGE2OTBmMyIsImlhdCI6MTczMTA1ODMzNSwiZXhwIjoxODE3NDU4MzM1LCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDIiLCJpc3MiOiJDb2xsYWJab25lLUFQUCIsInN1YiI6Im1hcmNvc2xvcGV6ZGV2MThAZ21haWwuY29tIn0.QF4XzQ1jq8s5IstIrG8dwHOPM19xkUHHfXem6TGJRaA.gy8yw2YlmcsPUGrk%2Fn2OSNsDRQRKpMjngEJ%2B8yYJzgM
+
+###
+POST http://localhost:3002/api/v1/identity/confirm-email
+Content-Type: application/json
+
+{
+    "confirmationToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyMjhjNmZiLWEzZDEtNGI1NC1iYjEwLTY1NDA2NGE2OTBmMyIsInZlcnNpb24iOjAsImlhdCI6MTczMTA1ODMwNCwiZXhwIjoxNzU5ODU4MzA0LCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDIiLCJpc3MiOiJDb2xsYWJab25lLUFQUCIsInN1YiI6Im1hcmNvc2xvcGV6ZGV2MThAZ21haWwuY29tIn0.EHQ1SJHFSkJ3XPp8fkFXv5yi3Eqksj6J33VTfMwwYOk"
+}

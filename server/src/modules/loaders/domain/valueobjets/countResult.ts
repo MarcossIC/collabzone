@@ -1,4 +1,6 @@
+import { UUID } from "crypto";
+
 export interface CountResult {
-    id: number;
+    id: UUID;
     count: number;
   }

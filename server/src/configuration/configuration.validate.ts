@@ -5,7 +5,8 @@ export const configurationValidate = Joi.object({
   NODE_ENV: Joi.string().required(),
   UI_URL: Joi.string().required(),
   UI_LOCAL_URL: Joi.string().required(),
-  
+  APP_DOMAIN: Joi.string().required(),
+  APP_ID: Joi.string().required(),
 
   THROTTLE_TTL: Joi.number().integer().optional(),
   THROTTLE_LIMIT: Joi.number().integer().optional(),

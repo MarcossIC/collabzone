@@ -11,21 +11,8 @@ export class ExceptionInterceptor implements NestInterceptor {
           ? error.getStatus() 
           : HttpStatus.INTERNAL_SERVER_ERROR;
         error.status = status;
-
-        const isClassValidatorError = [
-          error.status === HttpStatus.PRECONDITION_FAILED,
-          Array.isArray(error?.response?.message),
-        ].every(Boolean);
-
-        if (isClassValidatorError) {
-          error.message = error?.response?.message.join(', ');
-          error.response.message = error.message;
-        }
-
+        
         const req = executionContext.switchToHttp().getRequest();
-
-        const headers = executionContext.getArgs()[0]?.headers;
-
         error.user = req.headers?.['user'];
 
         this.sanitizeExternalError(error);
@@ -42,7 +29,6 @@ export class ExceptionInterceptor implements NestInterceptor {
     );
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private sanitizeExternalError(error: any) {
     if (typeof error?.response === 'object' && error?.isAxiosError) {
       error['getResponse'] = () => ({ ...error?.response?.data?.error });

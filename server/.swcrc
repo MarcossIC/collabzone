@@ -20,11 +20,14 @@
         "@modules/*": ["src/modules/*"],
         "@configuration/*": ["src/configuration/*"]
       },
-      "target": "esnext"
+      "target": "esnext",
+      "loose": false,
+      "externalHelpers": false
     },
+    "isModule": true,
     "module": {
       "type": "es6",
       "resolveFully": true
     },
-    "minify": false
+    "minify": true
   }

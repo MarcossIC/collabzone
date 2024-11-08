@@ -14,14 +14,14 @@ import { MessageType, ErrorType } from '../../domain/types/loggerType';
 import { ILoggerService } from './logger.adapter';
 import {
   formatDate,
-} from '../../domain/mapper/formatDay';
+} from '../../domain/utils/formatDay';
 import {
   green,
   gray,
   yellow,
   red,
   isColorSupported,
-} from '@/common/domain/colors';
+} from '@/common/domain/utils/colors';
 
 @Injectable({ scope: Scope.REQUEST })
 export class LoggerService implements ILoggerService {
@@ -36,7 +36,6 @@ export class LoggerService implements ILoggerService {
 
   connect<T = LevelWithSilent>(logLevel: T): void {
     const isDevelopment = process.env.NODE_ENV === 'development';
-    console.log({ nodeenv: process.env.NODE_ENV });
     const pinoLogger = pino(
       {
         level: [logLevel, 'trace'].find(Boolean).toString(),
@@ -145,7 +144,7 @@ export class LoggerService implements ILoggerService {
       logger: pinoLogger,
       quietReqLogger: true,
       customSuccessMessage: (req: IncomingMessage, res: ServerResponse) => {
-        return `request ${res.statusCode >= 400 ? red('errro') : green('success')} with status code: ${res.statusCode}`;
+        return `request ${res.statusCode >= 400 ? red('errror') : green('success')} with status code: ${res.statusCode}`;
       },
       customErrorMessage: (
         req: IncomingMessage,
