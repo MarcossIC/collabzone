@@ -33,8 +33,8 @@
     "migration:run": "npm run typeorm -- migration:run",
     "migration:revert": "npm run typeorm -- migration:revert",
     "fixtures": "cross-env NODE_ENV=development fixtures load ./data/fixture --sync --debug --dataSource=./src/configuration/orm.configuration.ts --require=ts-node/register --require=tsconfig-paths/register",
-    "prepare": "node ./data/scripts/setup-husky.js",
-    "postinstall": "node ./data/scripts/setup-husky.js"
+    "prepare": "node setup-husky.js",
+    "postinstall": "node setup-husky.js"
   },
   "dependencies": {
     "@as-integrations/fastify": "^1.3.0",
