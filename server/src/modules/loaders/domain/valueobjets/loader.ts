@@ -1,6 +1,6 @@
-import { Base } from "@/common/domain/models/base.domain";
+import { Base } from '@/common/domain/models/base.domain';
 
 export interface Loader<T extends Base, P = undefined> {
-    obj: T;
-    params: P;
-  }
+  obj: T;
+  params: P;
+}

@@ -11,17 +11,15 @@ import { CommonService } from './domain/port/common.service';
       provide: ILoggerService,
       useFactory: () => {
         const logger = new LoggerService();
-        logger.connect("trace");
+        logger.connect('trace');
         return logger;
-      }
+      },
     },
     {
       provide: CommonService,
-      useClass: CommonServiceAdapter
-    }
+      useClass: CommonServiceAdapter,
+    },
   ],
-  exports: [
-    ILoggerService,CommonService
-  ],
+  exports: [ILoggerService, CommonService],
 })
 export class CommonModule {}

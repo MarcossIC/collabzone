@@ -1,4 +1,9 @@
-import { BadRequestException, ConflictException, Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { Paginated } from '../domain/types/paginated';
 import { CommonService } from '../domain/port/common.service';
 import { EntitySchema, QueryFailedError, Repository } from 'typeorm';
@@ -6,8 +11,7 @@ import { Base } from '../domain/models/base.domain';
 import { validate } from 'class-validator';
 
 @Injectable()
-export class CommonServiceAdapter extends CommonService{
-
+export class CommonServiceAdapter extends CommonService {
   /**
    * Takes an entity array and returns the paginated type of that entity array
    * It uses cursor pagination as recommended in https://relay.dev/graphql/connections.htm
@@ -65,53 +69,59 @@ export class CommonServiceAdapter extends CommonService{
   public override async saveEntity<T extends Base>(
     repo: Repository<T>,
     entity: T,
-    message: string
+    message: string,
   ): Promise<T> {
     await this.validateEntity(entity);
     return this.throwDuplicateError(repo.save(entity), entity, message);
   }
-  
+
   public override async updateEntity<T extends Base>(
     repo: Repository<T>,
     entity: T,
-    message: string
+    message: string,
   ): Promise<T> {
     await this.validateEntity(entity);
     return this.throwDuplicateError(repo.preload(entity), entity, message);
   }
 
-    /**
+  /**
    * Checks is an error is of the code 23505, PostgreSQL's duplicate value error,
    * and throws a conflict exception
    */
-    public async throwDuplicateError<T>(
-      promise: Promise<T>,
-      entity: T,
-      message?: string,
-    ): Promise<T> {
-      try {
-        return await promise;
-      } catch (error) {
-        if (error instanceof QueryFailedError) {
-          // PostgreSQL
-          if (error.driverError?.code === '23505') {
-            throw new ConflictException(message ?? `Valor duplicado en la base de datos para: ${JSON.stringify(entity)}`);
-          }
-          // MySQL 
-          if (error.driverError?.code === 'ER_DUP_ENTRY') {
-            throw new ConflictException(message ?? `Valor duplicado en la base de datos para: ${JSON.stringify(entity)}`);
-          }
-        } else {
-          throw new BadRequestException(error);
+  public async throwDuplicateError<T>(
+    promise: Promise<T>,
+    entity: T,
+    message?: string,
+  ): Promise<T> {
+    try {
+      return await promise;
+    } catch (error) {
+      if (error instanceof QueryFailedError) {
+        // PostgreSQL
+        if (error.driverError?.code === '23505') {
+          throw new ConflictException(
+            message ??
+              `Valor duplicado en la base de datos para: ${JSON.stringify(entity)}`,
+          );
         }
+        // MySQL
+        if (error.driverError?.code === 'ER_DUP_ENTRY') {
+          throw new ConflictException(
+            message ??
+              `Valor duplicado en la base de datos para: ${JSON.stringify(entity)}`,
+          );
+        }
+      } else {
+        throw new BadRequestException(error);
       }
     }
+  }
 
-    public async throwInternalError<T>(promise: Promise<T>): Promise<T> {
-      try {
-        return await promise;
-      } catch (error) {
-        throw new InternalServerErrorException(error);
-      }
+  public async throwInternalError<T>(promise: Promise<T>): Promise<T> {
+    try {
+      return await promise;
+    } catch (error) {
+      throw new InternalServerErrorException(error);
     }
+  }
 }

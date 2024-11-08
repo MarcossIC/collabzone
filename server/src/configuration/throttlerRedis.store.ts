@@ -62,7 +62,7 @@ export class RedisThrottlerStorage implements ThrottlerStorage {
         `throttler:${throttlerName}:${key}:blocked`,
         blockExpiration,
         'PX',
-        blockDuration
+        blockDuration,
       );
 
       return {
@@ -83,7 +83,7 @@ export class RedisThrottlerStorage implements ThrottlerStorage {
       `throttler:${throttlerName}:${key}`,
       JSON.stringify(record),
       'PX',
-      ttl * 1000
+      ttl * 1000,
     );
 
     return {

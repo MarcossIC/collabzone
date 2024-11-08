@@ -42,7 +42,7 @@ export class AppExceptionFilter implements ExceptionFilter {
 
     if (error.code === HttpStatus.PRECONDITION_FAILED) {
       const res = exception.getResponse() as object;
-      error.details = 'errors' in res ? res.errors : {}; 
+      error.details = 'errors' in res ? res.errors : {};
     }
 
     response.status(status).send({

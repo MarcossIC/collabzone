@@ -66,7 +66,7 @@ import { IdentityModule } from './modules/identity/identity.module';
     }),
     CommonModule,
     LoadersModule,
-    IdentityModule
+    IdentityModule,
   ],
   providers: [AppService, AppResolver],
   controllers: [AppController],

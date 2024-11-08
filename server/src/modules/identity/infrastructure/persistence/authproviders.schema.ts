@@ -1,8 +1,10 @@
 import { EntitySchema } from 'typeorm';
 import { AuthProvidersEnum } from '../../domain/enums/authProvider.enum';
 import { AuthProvider } from '../../domain/models/authProvider.domain';
-import { columnDateType, columnEnumType } from '@/common/infrastructure/persistence/base.schema';
-
+import {
+  columnDateType,
+  columnEnumType,
+} from '@/common/infrastructure/persistence/base.schema';
 
 export const AuthProviderSchema = new EntitySchema<AuthProvider>({
   name: 'AuthProvider',
@@ -46,7 +48,7 @@ export const AuthProviderSchema = new EntitySchema<AuthProvider>({
       primary: true,
       nullable: false,
       joinColumn: {
-        name: 'user_id', 
+        name: 'user_id',
         referencedColumnName: 'id',
       },
       onDelete: 'CASCADE',

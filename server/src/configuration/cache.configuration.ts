@@ -18,7 +18,7 @@ export class CacheConfig implements CacheOptionsFactory {
       const redisUri = `redis://${redisConfig.host}:${redisConfig.port}`;
       const keyv = new Keyv({
         store: new KeyvRedis(redisUri),
-        ttl: ttl * 1000, 
+        ttl: ttl * 1000,
       });
 
       return keyv;

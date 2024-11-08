@@ -16,8 +16,6 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 
 @Injectable()
 export class UserMySQLRepository extends UserRepository {
-  
-
   constructor(
     private readonly commonService: CommonService,
     @InjectRepository(UserSchema)
@@ -28,7 +26,10 @@ export class UserMySQLRepository extends UserRepository {
     super();
   }
 
-  public override async create(user: User, provider: AuthProvidersEnum): Promise<User> {
+  public override async create(
+    user: User,
+    provider: AuthProvidersEnum,
+  ): Promise<User> {
     const { name } = user;
     const isConfirmed = provider !== AuthProvidersEnum.LOCAL;
 
@@ -96,14 +97,17 @@ export class UserMySQLRepository extends UserRepository {
     );
   }
 
-  public async checkLastPassword(credentials: Credentials, password: string): Promise<void> {
+  public async checkLastPassword(
+    credentials: Credentials,
+    password: string,
+  ): Promise<void> {
     const { lastPassword, passwordUpdatedAt } = credentials;
 
     if (lastPassword.length === 0 || !(await compare(password, lastPassword))) {
       throw new UnauthorizedException(IDENTITY_ERRORS.USER_INVALID_CREDENTIALS);
     }
     const now = new Date();
-  
+
     // Diferencia en ms
     const diffInMs = now.getTime() - passwordUpdatedAt.getTime();
     const timeUnits = [
@@ -114,13 +118,15 @@ export class UserMySQLRepository extends UserRepository {
     // Si la contraseña es antigua se lanza una excepcion informando desde hace cuanto cambio la contraseña
     for (const { unit, value } of timeUnits) {
       if (value > 0) {
-        const plural = value > 1 ? unit === "mes" ? 'es': 's' : '';
+        const plural = value > 1 ? (unit === 'mes' ? 'es' : 's') : '';
         throw new UnauthorizedException(
           `${IDENTITY_ERRORS.USER_PASSWORD_CHANGED}. Desde hace ${value} ${unit}${plural}`,
         );
       }
     }
 
-    throw new UnauthorizedException(`${IDENTITY_ERRORS.USER_PASSWORD_CHANGED} recientemente.`);
+    throw new UnauthorizedException(
+      `${IDENTITY_ERRORS.USER_PASSWORD_CHANGED} recientemente.`,
+    );
   }
 }

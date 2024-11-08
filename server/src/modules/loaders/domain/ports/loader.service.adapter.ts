@@ -121,8 +121,8 @@ export abstract class LoaderServiceAdapter {
    */
   protected abstract basicCounter<T extends Base, C extends Base>(
     data: Loader<T>[],
-    parent: new () => T, 
-    child: new () => C, 
+    parent: new () => T,
+    child: new () => C,
     childRelation: keyof C,
   ): Promise<number[]>;
 

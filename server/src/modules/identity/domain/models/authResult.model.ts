@@ -1,4 +1,4 @@
-import { UserSummary } from "@/modules/identity/domain/models/userSummary.model";
+import { UserSummary } from '@/modules/identity/domain/models/userSummary.model';
 
 export interface AuthResult {
   user: UserSummary;

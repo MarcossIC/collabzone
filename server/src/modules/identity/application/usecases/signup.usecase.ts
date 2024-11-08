@@ -36,11 +36,8 @@ export class SignupUsecaseAdapter extends SignupUsecase {
       AuthProvidersEnum.LOCAL,
     );
 
-    await this.repository.createAuthProvider(
-      AuthProvidersEnum.LOCAL,
-      user.id,
-    );
- 
+    await this.repository.createAuthProvider(AuthProvidersEnum.LOCAL, user.id);
+
     return user;
   }
 }

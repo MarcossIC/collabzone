@@ -4,7 +4,7 @@ import { QueryOrderEnum } from '../enum/QueryCursorOrder.enum';
 import { Base } from '../models/base.domain';
 
 export abstract class CommonService {
-      /**
+  /**
    * Takes a date, string or number and returns the base 64
    * representation of it
    */
@@ -83,12 +83,12 @@ export abstract class CommonService {
   public abstract saveEntity<T extends Base>(
     repo: unknown,
     entity: T,
-    message: string
+    message: string,
   ): Promise<T>;
   public abstract updateEntity<T extends Base>(
     repo: unknown,
     entity: T,
-    message: string
+    message: string,
   ): Promise<T>;
   public abstract throwDuplicateError<T>(
     promise: Promise<T>,

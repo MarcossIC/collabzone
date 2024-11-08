@@ -11,9 +11,7 @@ export class Cluster {
 
     if (cluster.isPrimary) {
       Cluster.logger.log(`Starting cluster with ${cpuCount} workers...`);
-      Cluster.logger.log(
-        `Master server is running on process ${process.pid}`,
-      );
+      Cluster.logger.log(`Master server is running on process ${process.pid}`);
 
       for (let i = 0; i < cpuCount; i++) {
         Cluster.logger.log(`Forking process number ${i + 1}...`);

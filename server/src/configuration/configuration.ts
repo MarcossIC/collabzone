@@ -1,9 +1,9 @@
-import { seconds } from "@nestjs/throttler";
-import { redisUrlToOptions } from "./utils/redisUrlToOptions";
+import { seconds } from '@nestjs/throttler';
+import { redisUrlToOptions } from './utils/redisUrlToOptions';
 
 export const configuration = () => {
   const testing = process.env.NODE_ENV !== 'production';
-  return ({
+  return {
     server: {
       port: Number(process.env.PORT),
       UI_URL: process.env.UI_URL,
@@ -37,5 +37,5 @@ export const configuration = () => {
         time: parseInt(process.env.JWT_REFRESH_TIME, 10),
       },
     },
-  });
-}
+  };
+};

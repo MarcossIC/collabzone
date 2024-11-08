@@ -3,10 +3,9 @@ import { OnEvent } from '@nestjs/event-emitter';
 import { NotConfirmedEvent } from '../domain/models/events.model';
 import { ILoggerService } from '@/common/infrastructure/logger/logger.adapter';
 
-
 @Injectable()
 export class UserNotConfirmedListener {
-    constructor(private readonly logger: ILoggerService) {}
+  constructor(private readonly logger: ILoggerService) {}
 
   @OnEvent('user.notconfirmed', { async: true })
   async handleUserCreatedEvent(event: NotConfirmedEvent) {

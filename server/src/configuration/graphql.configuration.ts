@@ -14,12 +14,10 @@ import { isNull, isUndefined } from './utils/validations';
 export class GqlConfigService
   implements GqlOptionsFactory<MercuriusDriverConfig>
 {
-  private readonly testing:boolean;
+  private readonly testing: boolean;
   private readonly redisOpt;
 
-  constructor(
-    private readonly configService: ConfigService,
-  ) {
+  constructor(private readonly configService: ConfigService) {
     this.testing = this.configService.get<boolean>('testing');
     this.redisOpt = this.configService.get<RedisOptions>('redis');
   }

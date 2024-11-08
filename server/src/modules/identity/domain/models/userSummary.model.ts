@@ -1,5 +1,5 @@
-import { UUID } from "crypto";
-import { User } from "./user.domain";
+import { UUID } from 'crypto';
+import { User } from './user.domain';
 
 export class UserSummary {
   public readonly id: UUID;

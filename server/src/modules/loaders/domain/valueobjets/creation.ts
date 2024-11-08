@@ -1,3 +1,3 @@
 export interface Creation {
-    createdAt: Date;
-  }
+  createdAt: Date;
+}

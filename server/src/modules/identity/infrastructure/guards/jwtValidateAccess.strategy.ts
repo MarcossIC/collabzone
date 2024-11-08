@@ -13,7 +13,9 @@ export class ValidateAccessToken extends PassportStrategy(Strategy) {
         (request: any) => {
           const token = request?.cookies?.['access_token'];
           if (!token) {
-            throw new UnauthorizedException(IDENTITY_ERRORS.USER_TOKEN_NOT_FOUND);
+            throw new UnauthorizedException(
+              IDENTITY_ERRORS.USER_TOKEN_NOT_FOUND,
+            );
           }
           return token;
         },

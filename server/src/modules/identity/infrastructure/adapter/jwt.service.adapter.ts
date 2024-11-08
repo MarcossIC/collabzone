@@ -130,17 +130,18 @@ export class JwtServiceAdapter extends CustomJwtService {
     }
   }
 
-  public async verifyToken<
-    T extends AccessToken | RefreshToken | EmailToken,
-  >(token: string, tokenType: TokenTypeEnum): Promise<T> {
+  public async verifyToken<T extends AccessToken | RefreshToken | EmailToken>(
+    token: string,
+    tokenType: TokenTypeEnum,
+  ): Promise<T> {
     const { secret, time } = this.jwtConfig[tokenType];
     return this.throwBadRequest(
-        this.verifyTokenAsync(token, {
+      this.verifyTokenAsync(token, {
         issuer: this.issuer,
-        audience: new RegExp(this.domain), 
+        audience: new RegExp(this.domain),
         maxAge: time,
         algorithms: ['HS256'],
-        secret
+        secret,
       }),
     );
   }

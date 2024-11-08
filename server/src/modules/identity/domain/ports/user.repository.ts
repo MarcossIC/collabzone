@@ -22,5 +22,5 @@ export abstract class UserRepository {
   abstract checkLastPassword(
     credentials: Credentials,
     password: string,
-  ): Promise<void>
+  ): Promise<void>;
 }

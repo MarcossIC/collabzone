@@ -16,7 +16,7 @@ export enum ENVIRONMENT {
 }
 
 const production: DataSourceOptions = {
-  type: "mysql",
+  type: 'mysql',
   host: process.env.DB_HOST,
   port: +process.env.DB_PORT,
   username: process.env.DB_USERNAME,
@@ -27,7 +27,7 @@ const production: DataSourceOptions = {
 };
 
 const staging: DataSourceOptions = {
-  type: "mysql",
+  type: 'mysql',
   host: process.env.DB_HOST,
   port: +process.env.DB_PORT,
   username: process.env.DB_USERNAME,
@@ -38,7 +38,7 @@ const staging: DataSourceOptions = {
 };
 
 const development: DataSourceOptions = {
-  type: "mysql",
+  type: 'mysql',
   host: process.env.DB_HOST,
   port: +process.env.DB_PORT,
   username: process.env.DB_USERNAME,
@@ -50,7 +50,7 @@ const development: DataSourceOptions = {
 };
 
 const automatedTests: DataSourceOptions = {
-  type: 'better-sqlite3' ,
+  type: 'better-sqlite3',
   database: `./data/tests.${Math.random()}.db`,
   synchronize: true,
   dropSchema: false,

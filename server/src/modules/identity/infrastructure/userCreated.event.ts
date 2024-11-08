@@ -18,7 +18,11 @@ export class UserCreatedListener {
         obj: { token: confirmationToken },
       });
     } catch (error) {
-      this.logger.error(new ApiException(error as object, 500), 'Error sending confirmation email:', "UserCreatedListener");
+      this.logger.error(
+        new ApiException(error as object, 500),
+        'Error sending confirmation email:',
+        'UserCreatedListener',
+      );
     }
   }
 }

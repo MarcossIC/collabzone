@@ -67,7 +67,7 @@ export class IdentityController {
     @Res() res: Fasty.FastifyReply,
   ): Promise<void> {
     const token = this.refreshTokenFromReq(req);
-    console.log("Token, ", token)
+    console.log('Token, ', token);
     const result = await this.service.refreshTokenAccess(
       token,
       req.headers.origin,
@@ -103,7 +103,10 @@ export class IdentityController {
     @Body() confirmEmailDto: ConfirmEmailDto,
     @Res() res: Fasty.FastifyReply,
   ): Promise<void> {
-    const result = await this.service.confirmEmail(confirmEmailDto.confirmationToken, origin);
+    const result = await this.service.confirmEmail(
+      confirmEmailDto.confirmationToken,
+      origin,
+    );
 
     this.saveRefreshCookie(
       res,
@@ -143,7 +146,7 @@ export class IdentityController {
         path: '/',
         expires: new Date(now + this.refreshTime),
         maxAge: now + this.refreshTime,
-        sameSite: "lax",
+        sameSite: 'lax',
       })
       .setCookie('access_token', accessToken, {
         secure: !this.testing,
@@ -152,7 +155,7 @@ export class IdentityController {
         path: '/',
         expires: new Date(now + this.accessTime),
         maxAge: now + this.accessTime,
-        sameSite: "lax"
+        sameSite: 'lax',
       })
       .header('Content-Type', 'application/json');
   }

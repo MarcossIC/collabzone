@@ -1,3 +1,3 @@
 export interface IWsParams {
-    readonly authorization?: string;
-  }
+  readonly authorization?: string;
+}

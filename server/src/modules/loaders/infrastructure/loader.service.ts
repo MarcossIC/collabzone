@@ -1,19 +1,18 @@
-import { Injectable } from "@nestjs/common";
-import { Loader } from "../domain/valueobjets/loader";
-import { Base } from "@/common/domain/models/base.domain";
-import { CountResult } from "../domain/valueobjets/countResult";
-import { EntityManager } from "typeorm";
-import { Creation } from "../domain/valueobjets/creation";
-import { CommonService } from "@/common/domain/port/common.service";
-import { FilterRelationType } from "@/common/domain/types/filterRelation";
-import { Paginated } from "@/common/domain/types/paginated";
-import { ExistenceResult } from "../domain/valueobjets/existenceResult";
-import { LoaderServiceAdapter } from "../domain/ports/loader.service.adapter";
-import { UUID } from "crypto";
-
+import { Injectable } from '@nestjs/common';
+import { Loader } from '../domain/valueobjets/loader';
+import { Base } from '@/common/domain/models/base.domain';
+import { CountResult } from '../domain/valueobjets/countResult';
+import { EntityManager } from 'typeorm';
+import { Creation } from '../domain/valueobjets/creation';
+import { CommonService } from '@/common/domain/port/common.service';
+import { FilterRelationType } from '@/common/domain/types/filterRelation';
+import { Paginated } from '@/common/domain/types/paginated';
+import { ExistenceResult } from '../domain/valueobjets/existenceResult';
+import { LoaderServiceAdapter } from '../domain/ports/loader.service.adapter';
+import { UUID } from 'crypto';
 
 @Injectable()
-export class LoadersService extends  LoaderServiceAdapter {
+export class LoadersService extends LoaderServiceAdapter {
   constructor(
     private readonly em: EntityManager,
     private readonly commonService: CommonService,
@@ -23,20 +22,20 @@ export class LoadersService extends  LoaderServiceAdapter {
 
   protected async basicCounter<T extends Base, C extends Base>(
     data: Loader<T>[],
-    parent: new () => T, 
-    child: new () => C, 
+    parent: new () => T,
+    child: new () => C,
     childRelation: keyof C,
   ): Promise<number[]> {
     if (data.length === 0) return [];
-  
+
     const ids = LoadersService.getEntityIds(data);
-  
+
     const subQuery = this.em
-    .createQueryBuilder()
-    .select('COUNT(c.id)', 'count')
-    .from(child, 'c')
-    .where(`c.${String(childRelation)} = p.id`)
-    .getQuery();
+      .createQueryBuilder()
+      .select('COUNT(c.id)', 'count')
+      .from(child, 'c')
+      .where(`c.${String(childRelation)} = p.id`)
+      .getQuery();
     const raw: CountResult[] = await this.em
       .createQueryBuilder()
       .select('p.id', 'id')
@@ -51,7 +50,7 @@ export class LoadersService extends  LoaderServiceAdapter {
 
   /**
    * Pivot Counter
-   * 
+   *
    * Loads the count of many-to-many relationships through a pivot table.
    * @param data Array of loaders containing the parent entities
    * @param parent Parent entity class
@@ -62,8 +61,8 @@ export class LoadersService extends  LoaderServiceAdapter {
    */
   protected async pivotCounter<T extends Base, P extends Creation>(
     data: Loader<T>[],
-    parent: new () => T, 
-    pivot: new () => P, 
+    parent: new () => T,
+    pivot: new () => P,
     pivotParent: keyof P,
     pivotChild: keyof P,
   ): Promise<number[]> {
@@ -98,7 +97,7 @@ export class LoadersService extends  LoaderServiceAdapter {
 
   /**
    * Pivot Paginator
-   * 
+   *
    * Loads paginated many-to-many relationships
    * @param data Array of loaders containing the parent entities and pagination params
    * @param parent Parent entity class
@@ -115,8 +114,8 @@ export class LoadersService extends  LoaderServiceAdapter {
     C extends Base,
   >(
     data: Loader<T, FilterRelationType>[],
-    parent: new () => T, 
-    pivot: new () => P, 
+    parent: new () => T,
+    pivot: new () => P,
     pivotName: keyof T,
     pivotParent: keyof P,
     pivotChild: keyof P,
@@ -171,18 +170,18 @@ export class LoadersService extends  LoaderServiceAdapter {
     const map = new Map<UUID, Paginated<C>>();
 
     for (const result of results.entities) {
-      const rawResult = results.raw.find(r => r.id === result.id);
+      const rawResult = results.raw.find((r) => r.id === result.id);
       const pivots = result[strPivotName] as P[];
-      const entities: C[] = pivots.map(pivot => pivot[strPivotChild] as C);
+      const entities: C[] = pivots.map((pivot) => pivot[strPivotChild] as C);
 
       map.set(
         result.id,
         this.commonService.paginate(
-          entities, 
-          rawResult?.count || 0, 
-          0, 
-          cursor, 
-          first
+          entities,
+          rawResult?.count || 0,
+          0,
+          cursor,
+          first,
         ),
       );
     }
@@ -195,27 +194,27 @@ export class LoadersService extends  LoaderServiceAdapter {
     );
   }
 
-    /**
+  /**
    * Get Existence
-   * 
+   *
    * Checks for the existence of related records based on a given condition
    * @param data Array of loaders containing the parent entities
    * @param parent Parent entity class
    * @param fromCondition SQL FROM condition string for the existence check
    * @returns Array of booleans indicating existence for each parent entity
    */
-    protected async getExistence<T extends Base>(
-      data: Loader<T, FilterRelationType>[],
-      parent: new () => T, 
-      fromCondition: string,
-    ): Promise<boolean[]> {
-      if (data.length === 0) return [];
-  
-      const ids = LoadersService.getEntityIds(data);
-  
-      // En TypeORM, necesitamos construir el CASE de manera diferente
-      // ya que la sintaxis es específica para cada base de datos
-      const existenceQuery = `
+  protected async getExistence<T extends Base>(
+    data: Loader<T, FilterRelationType>[],
+    parent: new () => T,
+    fromCondition: string,
+  ): Promise<boolean[]> {
+    if (data.length === 0) return [];
+
+    const ids = LoadersService.getEntityIds(data);
+
+    // En TypeORM, necesitamos construir el CASE de manera diferente
+    // ya que la sintaxis es específica para cada base de datos
+    const existenceQuery = `
         CASE
           WHEN EXISTS (
             SELECT 1
@@ -225,24 +224,23 @@ export class LoadersService extends  LoaderServiceAdapter {
           ELSE false
         END as "existence"
       `;
-  
-      // Ejecutamos la consulta usando el QueryBuilder de TypeORM
-      const raw: ExistenceResult[] = await this.em 
-        .createQueryBuilder()
-        .select('p.id', 'id')
-        .addSelect(existenceQuery)
-        .from(parent, 'p')
-        .where('p.id IN (:...ids)', { ids })
-        .getRawMany();
-  
-      // Creamos el mapa de resultados
-      const map = new Map<UUID, boolean>();
-      
-      for (const result of raw) {
-        map.set(result.id, Boolean(result.existence));
-      }
-  
-      return LoadersService.getResults(ids, map, false);
+
+    // Ejecutamos la consulta usando el QueryBuilder de TypeORM
+    const raw: ExistenceResult[] = await this.em
+      .createQueryBuilder()
+      .select('p.id', 'id')
+      .addSelect(existenceQuery)
+      .from(parent, 'p')
+      .where('p.id IN (:...ids)', { ids })
+      .getRawMany();
+
+    // Creamos el mapa de resultados
+    const map = new Map<UUID, boolean>();
+
+    for (const result of raw) {
+      map.set(result.id, Boolean(result.existence));
     }
 
+    return LoadersService.getResults(ids, map, false);
+  }
 }

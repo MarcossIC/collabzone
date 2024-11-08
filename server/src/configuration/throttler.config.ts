@@ -20,7 +20,7 @@ export class ThrottlerConfig implements ThrottlerOptionsFactory {
     // O buscar la forma de implementarlo por tu cuenta
     return {
       throttlers: [config],
-      storage: isTesting ? undefined : new RedisThrottlerStorage(redisConfig)
+      storage: isTesting ? undefined : new RedisThrottlerStorage(redisConfig),
     };
   }
 }

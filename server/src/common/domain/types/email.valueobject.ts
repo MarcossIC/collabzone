@@ -1,5 +1,3 @@
-
-
 export class Email {
-    email: string;
+  email: string;
 }

@@ -4,4 +4,4 @@ export interface ApiResponseDTO<T> {
   data?: T;
 }
 
-export type ServiceApiResponse<T> =  Promise<ApiResponseDTO<T>>;
+export type ServiceApiResponse<T> = Promise<ApiResponseDTO<T>>;

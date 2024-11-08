@@ -14,13 +14,13 @@ export class SigninUsecaseAdapter extends SigninUsecase {
     const { email, password } = params;
     const user = await this.repository.findOneByEmail(email);
 
-    if(!user){
-        throw new UnauthorizedException(IDENTITY_ERRORS.USER_INVALID_CREDENTIALS);
+    if (!user) {
+      throw new UnauthorizedException(IDENTITY_ERRORS.USER_INVALID_CREDENTIALS);
     }
 
     if (!(await compare(password, user.password))) {
-        await this.repository.checkLastPassword(user.credentials, password);
-      }
+      await this.repository.checkLastPassword(user.credentials, password);
+    }
 
     return user;
   }

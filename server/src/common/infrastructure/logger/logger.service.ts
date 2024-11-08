@@ -12,9 +12,7 @@ import pinoPretty from 'pino-pretty';
 import { ApiException } from '../../domain/types/exception';
 import { MessageType, ErrorType } from '../../domain/types/loggerType';
 import { ILoggerService } from './logger.adapter';
-import {
-  formatDate,
-} from '../../domain/utils/formatDay';
+import { formatDate } from '../../domain/utils/formatDay';
 import {
   green,
   gray,
@@ -42,8 +40,10 @@ export class LoggerService implements ILoggerService {
       },
       multistream([
         {
-          level: isDevelopment ? 'trace' : "info",
-          stream: isDevelopment ? pinoPretty(this.getPinoConfig()) : process.stdout,
+          level: isDevelopment ? 'trace' : 'info',
+          stream: isDevelopment
+            ? pinoPretty(this.getPinoConfig())
+            : process.stdout,
         },
       ]),
     );
@@ -71,7 +71,11 @@ export class LoggerService implements ILoggerService {
   }
 
   trace(params: MessageType): void {
-    if(params.message.includes("Module") && params.message.includes("initialized")) return;
+    if (
+      params.message.includes('Module') &&
+      params.message.includes('initialized')
+    )
+      return;
     this.logStructured('trace', params, gray);
   }
 
@@ -151,7 +155,6 @@ export class LoggerService implements ILoggerService {
         res: ServerResponse,
         error: Error,
       ) => {
-   
         return `request ${red(error.name)} with status code: ${res.statusCode} `;
       },
       genReqId: (req: IncomingMessage) => {
@@ -174,7 +177,7 @@ export class LoggerService implements ILoggerService {
             method: request.method,
             url: request.url,
             headers: this.redactSensitiveHeaders(request.headers),
-          }
+          };
         },
         res: (response) => {
           return {
