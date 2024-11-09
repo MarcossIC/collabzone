@@ -13,12 +13,13 @@
       },
       "baseUrl": "./",
       "paths": {
-        "@/*": ["src/*"],
         "@data/*": ["data/*"],
-        "@root/*": ["*"],
+        "@test/*": ["__test__/*"],
         "@common/*": ["src/common/*"],
         "@modules/*": ["src/modules/*"],
-        "@configuration/*": ["src/configuration/*"]
+        "@configuration/*": ["src/configuration/*"],
+        "@/*": ["src/*"],
+        "@root/*": ["*"]
       },
       "target": "esnext",
       "loose": false,

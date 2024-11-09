@@ -1,15 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Loader } from '../domain/valueobjets/loader';
-import { Base } from '@/common/domain/models/base.domain';
-import { CountResult } from '../domain/valueobjets/countResult';
+import { UUID } from 'crypto';
 import { EntityManager } from 'typeorm';
-import { Creation } from '../domain/valueobjets/creation';
+
+import { Base } from '@/common/domain/models/base.domain';
 import { CommonService } from '@/common/domain/port/common.service';
 import { FilterRelationType } from '@/common/domain/types/filterRelation';
 import { Paginated } from '@/common/domain/types/paginated';
-import { ExistenceResult } from '../domain/valueobjets/existenceResult';
+
 import { LoaderServiceAdapter } from '../domain/ports/loader.service.adapter';
-import { UUID } from 'crypto';
+import { CountResult } from '../domain/valueobjets/countResult';
+import { Creation } from '../domain/valueobjets/creation';
+import { ExistenceResult } from '../domain/valueobjets/existenceResult';
+import { Loader } from '../domain/valueobjets/loader';
 
 @Injectable()
 export class LoadersService extends LoaderServiceAdapter {
@@ -66,7 +68,6 @@ export class LoadersService extends LoaderServiceAdapter {
     pivotParent: keyof P,
     pivotChild: keyof P,
   ): Promise<number[]> {
-    // Si no hay datos, retornamos array vacío
     if (data.length === 0) return [];
 
     const strPivotChild = String(pivotChild);

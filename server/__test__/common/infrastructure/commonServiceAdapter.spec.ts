@@ -192,7 +192,6 @@ describe('CommonServiceAdapter', () => {
         driverError: { code: 'ER_DUP_ENTRY' },
       });
 
-      // Mocking the promise to reject with the error
       const mockPromise = Promise.reject(mockError);
 
       await expect(

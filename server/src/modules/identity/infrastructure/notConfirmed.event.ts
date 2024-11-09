@@ -20,7 +20,6 @@ export class UserNotConfirmedListener {
         obj: { token: confirmationToken },
       });
     } catch (error) {
-      // Manejar el error si el envío del correo falla
       console.error('Error sending confirmation email:', error);
     }
   }

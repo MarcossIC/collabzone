@@ -5,6 +5,20 @@ export const mockConfigService = {
     if (key === 'server.port') {
       return MOCK_PORT;
     }
-    return null;
+    switch (key) {
+      case 'jwt':
+        return {
+          access: { secret: 'accessSecret', time: '2700000' },
+          refresh: { secret: 'refreshSecret', time: '2700000' },
+          confirmation: { secret: 'confirmationSecret', time: '2700000' },
+          resetPassword: { secret: 'resetSecret', time: '2700000' },
+        };
+      case 'APP_ID':
+        return 'test-app-id';
+      case 'APP_DOMAIN':
+        return 'test-app-domain';
+      default:
+        return null;
+    }
   }),
 };

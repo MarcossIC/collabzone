@@ -132,7 +132,6 @@ export class LoggerService implements ILoggerService {
       colorize: isColorSupported(),
       levelFirst: true,
       ignore: 'pid,hostname',
-      //quietReqLogger: true,
       customPrettifiers: {
         time: () => `[${this.getDateFormat()}]`,
       },
