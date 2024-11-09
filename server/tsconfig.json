@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "module": "esnext",
-    "target": "esnext",
+    "target": "ES2020",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": true,
@@ -31,7 +31,5 @@
       "@modules/*": ["src/modules/*"],
       "@configuration/*": ["src/configuration/*"]
     },
-    "types": ["vitest/globals"],
   },
-  "exclude": ["node_modules", "dist", "test", "__test__", "**/*.spec.ts", "**/*.test.ts"]
 }

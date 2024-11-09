@@ -6,16 +6,18 @@ import {
   Res,
   UnauthorizedException,
 } from '@nestjs/common';
-import { IdentityService } from '../domain/ports/identity.service';
-import { Origin } from '@/common/infrastructure/decorators/orign.decorator';
-import * as Fasty from 'fastify';
-import { CredentialDto } from './dtos/credential.dto';
-import { UserCreateDto } from './dtos/userCreate.dto';
 import { ConfigService } from '@nestjs/config';
 import { isEmpty, isJWT } from 'class-validator';
+import * as Fasty from 'fastify';
+
+import { Origin } from '@/common/infrastructure/decorators/orign.decorator';
 import { Public } from '@/common/infrastructure/decorators/public.decorator';
-import { ConfirmEmailDto } from './dtos/confirmationmail.dto';
 import { isNull, isUndefined } from '@/configuration/utils/validations';
+
+import { IdentityService } from '../domain/ports/identity.service';
+import { ConfirmEmailDto } from './dtos/confirmationmail.dto';
+import { CredentialDto } from './dtos/credential.dto';
+import { UserCreateDto } from './dtos/userCreate.dto';
 
 @Controller('v1/identity')
 export class IdentityController {
@@ -67,7 +69,6 @@ export class IdentityController {
     @Res() res: Fasty.FastifyReply,
   ): Promise<void> {
     const token = this.refreshTokenFromReq(req);
-    console.log('Token, ', token);
     const result = await this.service.refreshTokenAccess(
       token,
       req.headers.origin,

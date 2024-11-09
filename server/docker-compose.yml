@@ -13,9 +13,3 @@ services:
     volumes:
       - ./data/docker/volumes/mysql/:/var/lib/mysql
 
-  cognito:
-    image: jagregory/cognito-local
-    ports:
-      - '9229:9229'
-    volumes:
-      - ./data/docker/volumes/cognito:/app/.cognito

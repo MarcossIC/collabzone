@@ -1,32 +1,31 @@
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
+import Manager from 'cache-manager';
+import { UUID } from 'crypto';
+
+import { CommonService } from '@/common/domain/port/common.service';
 import { CommonMapper } from '@/common/domain/utils/common.mapper';
-import { TokenTypeEnum } from '../domain/enums/tokenTypes.enum';
-import { AuthResult } from '../domain/models/authResult.model';
-import { User } from '../domain/models/user.domain';
 
 import {
   IDENTITY_ERRORS,
   IDENTITY_SUCCESS,
 } from '../domain/constants/messages';
-
-import { UserSummary } from '../domain/models/userSummary.model';
-import { EmailPayload, RefreshToken } from '../domain/models/token.model';
-
-import { UUID } from 'crypto';
+import { TokenTypeEnum } from '../domain/enums/tokenTypes.enum';
+import { AuthResult } from '../domain/models/authResult.model';
 import {
   NotConfirmedEvent,
   UserCreatedEvent,
 } from '../domain/models/events.model';
-import { CustomJwtService } from '../domain/ports/jwt.service';
-import { SigninUsecase } from '../domain/ports/signin.port';
-import { SignupUsecase } from '../domain/ports/signup.port';
-import { CommonService } from '@/common/domain/port/common.service';
-import { RefreshAccessUseCase } from '../domain/ports/refreshaccess.port';
-import { EventEmitter2 } from '@nestjs/event-emitter';
+import { EmailPayload, RefreshToken } from '../domain/models/token.model';
+import { User } from '../domain/models/user.domain';
+import { UserSummary } from '../domain/models/userSummary.model';
 import { ConfirmMailUsecase } from '../domain/ports/confirmmail.port';
 import { IdentityService } from '../domain/ports/identity.service';
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import Manager from 'cache-manager';
+import { CustomJwtService } from '../domain/ports/jwt.service';
+import { RefreshAccessUseCase } from '../domain/ports/refreshaccess.port';
+import { SigninUsecase } from '../domain/ports/signin.port';
+import { SignupUsecase } from '../domain/ports/signup.port';
 
 @Injectable()
 export class IdentityServiceAdapter extends IdentityService {
@@ -134,13 +133,10 @@ export class IdentityServiceAdapter extends IdentityService {
       refreshToken,
       TokenTypeEnum.REFRESH,
     )) as RefreshToken;
-    console.log('Payload, ', payload);
     // Validar que no se encuentre en blacklist
     await this.checkBlackList(payload.id, payload.tokenId);
-    console.log('Checked');
     // Validar datos del usuario
     const user = await this.refreshUsecase.execute(payload.id, payload.sub);
-    console.log('User, ', user);
     // Crear respuesta
     const authResult = await this.generateAuthResult(user, domain);
 

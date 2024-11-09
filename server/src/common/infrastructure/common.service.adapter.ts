@@ -4,11 +4,12 @@ import {
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { Paginated } from '../domain/types/paginated';
-import { CommonService } from '../domain/port/common.service';
-import { EntitySchema, QueryFailedError, Repository } from 'typeorm';
-import { Base } from '../domain/models/base.domain';
 import { validate } from 'class-validator';
+import { EntitySchema, QueryFailedError, Repository } from 'typeorm';
+
+import { Base } from '../domain/models/base.domain';
+import { CommonService } from '../domain/port/common.service';
+import { Paginated } from '../domain/types/paginated';
 
 @Injectable()
 export class CommonServiceAdapter extends CommonService {
@@ -51,6 +52,7 @@ export class CommonServiceAdapter extends CommonService {
 
     return pages;
   }
+
   public formatTitle(title: string): string {
     return title
       .trim()
@@ -73,15 +75,6 @@ export class CommonServiceAdapter extends CommonService {
   ): Promise<T> {
     await this.validateEntity(entity);
     return this.throwDuplicateError(repo.save(entity), entity, message);
-  }
-
-  public override async updateEntity<T extends Base>(
-    repo: Repository<T>,
-    entity: T,
-    message: string,
-  ): Promise<T> {
-    await this.validateEntity(entity);
-    return this.throwDuplicateError(repo.preload(entity), entity, message);
   }
 
   /**
@@ -115,6 +108,15 @@ export class CommonServiceAdapter extends CommonService {
         throw new BadRequestException(error);
       }
     }
+  }
+
+  public override async updateEntity<T extends Base>(
+    repo: Repository<T>,
+    entity: T,
+    message: string,
+  ): Promise<T> {
+    await this.validateEntity(entity);
+    return this.throwDuplicateError(repo.preload(entity), entity, message);
   }
 
   public async throwInternalError<T>(promise: Promise<T>): Promise<T> {

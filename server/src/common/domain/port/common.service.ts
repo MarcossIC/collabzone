@@ -1,7 +1,12 @@
-import { InternalServerErrorException } from '@nestjs/common';
-import { Edge, Paginated } from '../types/paginated';
+import {
+  BadRequestException,
+  InternalServerErrorException,
+} from '@nestjs/common';
+
 import { QueryOrderEnum } from '../enum/QueryCursorOrder.enum';
 import { Base } from '../models/base.domain';
+import { CursorTypeEnum } from '../types/cursorType';
+import { Edge, Paginated } from '../types/paginated';
 
 export abstract class CommonService {
   /**
@@ -67,6 +72,36 @@ export abstract class CommonService {
       return await promise;
     } catch (error) {
       throw new InternalServerErrorException(error);
+    }
+  }
+  public decodeCursor(
+    cursor: string,
+    cursorType: CursorTypeEnum = CursorTypeEnum.STRING,
+  ): string | number | Date {
+    const str = Buffer.from(cursor, 'base64').toString('utf-8');
+
+    switch (cursorType) {
+      case CursorTypeEnum.DATE:
+        const milliUnix = parseInt(str, 10);
+
+        if (isNaN(milliUnix))
+          throw new BadRequestException(
+            'Cursor does not reference a valid date',
+          );
+
+        return new Date(milliUnix);
+      case CursorTypeEnum.NUMBER:
+        const num = parseInt(str, 10);
+
+        if (isNaN(num))
+          throw new BadRequestException(
+            'Cursor does not reference a valid number',
+          );
+
+        return num;
+      case CursorTypeEnum.STRING:
+      default:
+        return str;
     }
   }
 

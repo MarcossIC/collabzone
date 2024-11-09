@@ -1,11 +1,13 @@
+import fastifyCookie from '@fastify/cookie';
+import fastifyCors from '@fastify/cors';
+import fastifyCsrf from '@fastify/csrf-protection';
 import {
   ClassSerializerInterceptor,
-  ValidationPipe,
+  HttpException,
   HttpStatus,
   RequestMethod,
   ValidationError,
-  BadRequestException,
-  HttpException,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory, Reflector } from '@nestjs/core';
@@ -13,19 +15,16 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import fastifyCookie from '@fastify/cookie';
-import fastifyCors from '@fastify/cors';
-import fastifyCsrf from '@fastify/csrf-protection';
 import mercuriusUpload from 'mercurius-upload';
+import 'reflect-metadata';
 
 import { AppModule } from './app.module';
 import { Cluster } from './cluster';
-import { join } from 'path';
 import { CommonModule } from './common/common.module';
 import { ILoggerService } from './common/infrastructure/logger/logger.adapter';
-import { HttpLoggerInterceptor } from './configuration/interceptors/logger.interceptor';
-import { ExceptionInterceptor } from './configuration/interceptors/exception.interceptor';
 import { AppExceptionFilter } from './configuration/filters/exception.filter';
+import { ExceptionInterceptor } from './configuration/interceptors/exception.interceptor';
+import { HttpLoggerInterceptor } from './configuration/interceptors/logger.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
