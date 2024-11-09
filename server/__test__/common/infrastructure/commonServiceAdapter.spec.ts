@@ -9,6 +9,8 @@ import { CommonService } from '@/common/domain/port/common.service';
 import { CursorTypeEnum } from '@/common/domain/types/cursorType';
 import { CommonServiceAdapter } from '@/common/infrastructure/common.service.adapter';
 
+import { mockRepository } from './utils/MockRepository';
+
 interface IData {
   id: UUID;
   name: string;
@@ -36,13 +38,6 @@ const data: IData[] = new Array(50).fill(null).map((_, i) => ({
 jest.mock('class-validator', () => ({
   validate: jest.fn(),
 }));
-
-const mockRepository = {
-  save: jest.fn(),
-  findOne: jest.fn(),
-  find: jest.fn(),
-  delete: jest.fn(),
-} as unknown as Partial<Repository<Base>>;
 
 describe('CommonServiceAdapter', () => {
   let service: CommonService;

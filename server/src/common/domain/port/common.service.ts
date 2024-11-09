@@ -13,7 +13,7 @@ export abstract class CommonService {
    * Takes a date, string or number and returns the base 64
    * representation of it
    */
-  protected static encodeCursor(val: Date | string | number): string {
+  public static encodeCursor(val: Date | string | number): string {
     let str: string;
 
     if (val instanceof Date) {
@@ -31,7 +31,7 @@ export abstract class CommonService {
    * Takes an instance, the cursor key and a innerCursor,
    * and generates a GraphQL edge
    */
-  protected static createEdge<T>(
+  public static createEdge<T>(
     instance: T,
     cursor: keyof T,
     innerCursor?: string,
@@ -51,7 +51,7 @@ export abstract class CommonService {
   /**
    * Makes the order by query for MikroORM orderBy method.
    */
-  protected static getOrderBy<T>(
+  public static getOrderBy<T>(
     cursor: keyof T,
     order: QueryOrderEnum,
     innerCursor?: string,
