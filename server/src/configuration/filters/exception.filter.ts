@@ -5,13 +5,13 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
+import { FastifyReply } from 'fastify';
+
+import { ILoggerService } from '@/common/domain/port/logger.service';
 
 import { errorStatus } from '../../common/domain/static/httpStatus';
 import { ApiException, ErrorModel } from '../../common/domain/types/exception';
 import { formatDate } from '../../common/domain/utils/formatDay';
-import { ILoggerService } from '../../common/infrastructure/logger/logger.adapter';
-import { FastifyReply } from 'fastify';
-import { ValidationError } from 'class-validator';
 
 @Catch()
 export class AppExceptionFilter implements ExceptionFilter {

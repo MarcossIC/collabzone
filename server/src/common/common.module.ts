@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 
-import { LoggerService } from './infrastructure/logger/logger.service';
-import { ILoggerService } from './infrastructure/logger/logger.adapter';
-import { CommonServiceAdapter } from './infrastructure/common.service.adapter';
 import { CommonService } from './domain/port/common.service';
+import { ILoggerService } from './domain/port/logger.service';
+import { CommonServiceAdapter } from './infrastructure/common.service.adapter';
+import { LoggerService } from './infrastructure/logger/logger.service.adapter';
 
 @Module({
   providers: [

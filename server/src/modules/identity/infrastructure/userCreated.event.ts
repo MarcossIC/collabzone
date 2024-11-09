@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
-import { UserCreatedEvent } from '../domain/models/events.model';
-import { ILoggerService } from '@/common/infrastructure/logger/logger.adapter';
+
+import { ILoggerService } from '@/common/domain/port/logger.service';
 import { ApiException } from '@/common/domain/types/exception';
+
+import { UserCreatedEvent } from '../domain/models/events.model';
 
 @Injectable()
 export class UserCreatedListener {

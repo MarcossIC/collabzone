@@ -1,25 +1,25 @@
-import { IncomingMessage, ServerResponse } from 'node:http';
-
 import {
   Injectable,
   InternalServerErrorException,
   Scope,
 } from '@nestjs/common';
+import { IncomingMessage, ServerResponse } from 'node:http';
 import { LevelWithSilent, Logger, multistream, pino } from 'pino';
 import { HttpLogger, Options, pinoHttp } from 'pino-http';
 import pinoPretty from 'pino-pretty';
 
-import { ApiException } from '../../domain/types/exception';
-import { MessageType, ErrorType } from '../../domain/types/loggerType';
-import { ILoggerService } from './logger.adapter';
-import { formatDate } from '../../domain/utils/formatDay';
+import { ILoggerService } from '@/common/domain/port/logger.service';
 import {
-  green,
   gray,
-  yellow,
-  red,
+  green,
   isColorSupported,
+  red,
+  yellow,
 } from '@/common/domain/utils/colors';
+
+import { ApiException } from '../../domain/types/exception';
+import { ErrorType, MessageType } from '../../domain/types/loggerType';
+import { formatDate } from '../../domain/utils/formatDay';
 
 @Injectable({ scope: Scope.REQUEST })
 export class LoggerService implements ILoggerService {

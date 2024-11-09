@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
+
+import { ILoggerService } from '@/common/domain/port/logger.service';
+
 import { NotConfirmedEvent } from '../domain/models/events.model';
-import { ILoggerService } from '@/common/infrastructure/logger/logger.adapter';
 
 @Injectable()
 export class UserNotConfirmedListener {

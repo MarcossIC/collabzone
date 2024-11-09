@@ -7,9 +7,10 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { DataSource } from 'typeorm';
-import { ILoggerService } from './common/infrastructure/logger/logger.adapter';
-import { LoggerService } from './common/infrastructure/logger/logger.service';
+
+import { ILoggerService } from './common/domain/port/logger.service';
 import { ApiException } from './common/domain/types/exception';
+import { LoggerService } from './common/infrastructure/logger/logger.service.adapter';
 
 @Injectable()
 export class AppService implements OnModuleInit, OnModuleDestroy {

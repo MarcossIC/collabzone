@@ -5,8 +5,8 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { ILoggerService } from '../../common/infrastructure/logger/logger.adapter';
-import { IncomingMessage, ServerResponse } from 'node:http';
+
+import { ILoggerService } from '@/common/domain/port/logger.service';
 
 @Injectable()
 export class HttpLoggerInterceptor implements NestInterceptor {
@@ -26,8 +26,6 @@ export class HttpLoggerInterceptor implements NestInterceptor {
       request.headers.traceid = crypto.randomUUID();
       request.id = request.headers.traceid;
     }
-
-    //this.logger.pino(request, response);
 
     this.logger.pino(request?.raw, response?.raw);
     return next.handle();
