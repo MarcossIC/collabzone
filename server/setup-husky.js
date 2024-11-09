@@ -62,7 +62,7 @@ fi
 
 cd server
 
-npx vitest run --passWithNoTests || { echo -e "$(tput setaf 1)❌Tests failed. Push aborted.$(tput sgr0)"; exit 1; }`;
+npx cross-env NODE_ENV=automated_tests jest --passWithNoTests || { echo -e "$(tput setaf 1)❌Tests failed. Push aborted.$(tput sgr0)"; exit 1; }`;
   fs.writeFileSync(prePushPath, prePushHook);
 
   // Make hooks executable
@@ -72,7 +72,9 @@ npx vitest run --passWithNoTests || { echo -e "$(tput setaf 1)❌Tests failed. P
     execSync(`chmod +x ${prePushPath}`, { stdio: 'inherit' });
   }
 
-  console.log('Husky has been set up with a commit-msg, pre-commit and pre-push hook');
+  console.log(
+    'Husky has been set up with a commit-msg, pre-commit and pre-push hook',
+  );
 } catch (error) {
   console.error('Error setting up Husky:', error);
   process.exit(1);
